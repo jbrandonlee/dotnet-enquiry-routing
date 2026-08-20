@@ -1,4 +1,7 @@
 
+using Boilerplate.API.Extensions;
+using Microsoft.EntityFrameworkCore;
+
 namespace Boilerplate.API
 {
 	public class Program
@@ -8,9 +11,10 @@ namespace Boilerplate.API
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-
+			builder.Services.AddDbContext<ApplicationDbContext>(
+				options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database"))
+			);
 			builder.Services.AddControllers();
-			// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 			builder.Services.AddOpenApi();
 
 			var app = builder.Build();
@@ -19,12 +23,12 @@ namespace Boilerplate.API
 			if (app.Environment.IsDevelopment())
 			{
 				app.MapOpenApi();
+				app.ApplyMigrations();
 			}
 
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
-
 
 			app.MapControllers();
 

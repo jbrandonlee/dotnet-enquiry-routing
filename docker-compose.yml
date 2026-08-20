@@ -1,6 +1,34 @@
+name: dotnet_postgres_boilerplate
+
 services:
   boilerplate.api:
-    image: ${DOCKER_REGISTRY-}boilerplateapi
     build:
       context: .
       dockerfile: Boilerplate.API/Dockerfile
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      - ConnectionStrings__Database=Host=boilerplate.database;Port=5432;Database=${DB_DATABASE};Username=${DB_USER};Password=${DB_PASSWORD};Include Error Detail=True;
+    depends_on:
+      boilerplate.database:
+        condition: service_healthy
+    restart: always
+
+  boilerplate.database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./.container/database:/var/lib/postgresql
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d appdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  
