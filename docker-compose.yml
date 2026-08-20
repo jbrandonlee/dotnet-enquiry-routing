@@ -1,0 +1,6 @@
+services:
+  boilerplate.api:
+    image: ${DOCKER_REGISTRY-}boilerplateapi
+    build:
+      context: .
+      dockerfile: Boilerplate.API/Dockerfile
