@@ -1,6 +1,5 @@
 ﻿using EnquiryRouting.Api.Entities;
 using EnquiryRouting.Api.Models.Request;
-using EnquiryRouting.Api.Repositories;
 
 namespace EnquiryRouting.Api.Interfaces
 {

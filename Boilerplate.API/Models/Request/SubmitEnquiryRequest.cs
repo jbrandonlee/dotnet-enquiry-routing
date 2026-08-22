@@ -13,7 +13,7 @@ namespace EnquiryRouting.Api.Models.Request
 
 	public static class SubmitEnquiryRequestExtensions
 	{
-		public static Enquiry ToDomainModel(this SubmitEnquiryRequest dto, IEnumerable<Skill> skills)
+		public static Enquiry ToDomainModel(this SubmitEnquiryRequest dto, HashSet<Skill> skills)
 		{
 			LanguageCode languageCodeEnum = Enum.Parse<LanguageCode>(dto.LanguageCode);
 			var initalMessage = new ChatMessage(dto.ClientId, MessageSenderType.Client, dto.Message);

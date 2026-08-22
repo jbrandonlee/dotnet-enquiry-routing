@@ -33,5 +33,11 @@ namespace EnquiryRouting.Api.Entities
 			enquiry.Assign(this.Id);
 			//_enquiries.Add(enquiry);
 		}
+
+		public void UpdateStatus(string status)
+		{
+			var statusEnum = Enum.Parse<AgentStatus>(status);
+			Status = statusEnum;
+		}
 	}
 }

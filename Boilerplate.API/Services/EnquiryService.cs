@@ -19,7 +19,7 @@ namespace EnquiryRouting.Api.Services
 		public async Task<Enquiry> CreateEnquiryAsync(SubmitEnquiryRequest dto)
 		{
 			var skills = await skillRepository.GetByNamesAsync(dto.RequiredSkills);
-			var enquiry = dto.ToDomainModel(skills);
+			var enquiry = dto.ToDomainModel(skills.ToHashSet());
 
 			await enquiryRepository.AddAsync(enquiry);
 			return enquiry;
