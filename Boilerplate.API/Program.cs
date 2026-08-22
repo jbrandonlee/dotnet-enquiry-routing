@@ -1,8 +1,10 @@
-
-using Boilerplate.API.Extensions;
+using EnquiryRouting.Api.Extensions;
+using EnquiryRouting.Api.Interfaces;
+using EnquiryRouting.Api.Repositories;
+using EnquiryRouting.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace Boilerplate.API
+namespace EnquiryRouting.Api
 {
 	public class Program
 	{
@@ -10,16 +12,26 @@ namespace Boilerplate.API
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
+			builder.Services.AddOpenApi();
+			builder.Services.AddControllers();
 			builder.Services.AddDbContext<ApplicationDbContext>(
 				options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database"))
 			);
-			builder.Services.AddControllers();
-			builder.Services.AddOpenApi();
+
+			#region Add Domain Services
+			builder.Services.AddScoped<IAgentService, AgentService>();
+			builder.Services.AddScoped<IEnquiryService, EnquiryService>();
+			builder.Services.AddScoped<IMatchingService, MatchingService>();
+			#endregion
+
+			#region Add Repositories
+			builder.Services.AddScoped<IAgentRepository, AgentRepository>();
+			builder.Services.AddScoped<IEnquiryRepository, EnquiryRepository>();
+			builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+			#endregion
 
 			var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.MapOpenApi();
@@ -27,9 +39,7 @@ namespace Boilerplate.API
 			}
 
 			app.UseHttpsRedirection();
-
 			app.UseAuthorization();
-
 			app.MapControllers();
 
 			app.Run();

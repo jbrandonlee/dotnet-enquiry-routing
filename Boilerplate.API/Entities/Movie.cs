@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.API.Entities
+﻿namespace EnquiryRouting.Api.Entities
 {
 	public class Movie(string title, int year)
 	{

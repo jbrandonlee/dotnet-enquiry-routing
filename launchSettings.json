@@ -4,7 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "boilerplate.api": "StartDebugging"
+        "enquiryrouting.api": "StartDebugging"
       }
     }
   }

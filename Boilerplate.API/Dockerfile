@@ -12,19 +12,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Boilerplate.API/Boilerplate.API.csproj", "Boilerplate.API/"]
-RUN dotnet restore "./Boilerplate.API/Boilerplate.API.csproj"
+COPY ["EnquiryRouting.Api/EnquiryRouting.Api.csproj", "EnquiryRouting.Api/"]
+RUN dotnet restore "./EnquiryRouting.Api/EnquiryRouting.Api.csproj"
 COPY . .
-WORKDIR "/src/Boilerplate.API"
-RUN dotnet build "./Boilerplate.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/EnquiryRouting.Api"
+RUN dotnet build "./EnquiryRouting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Boilerplate.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./EnquiryRouting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Boilerplate.API.dll"]
+ENTRYPOINT ["dotnet", "EnquiryRouting.Api.dll"]

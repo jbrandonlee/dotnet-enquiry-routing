@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="Boilerplate.API/Boilerplate.API.csproj" />
+    <Project Path="Boilerplate.API/EnquiryRouting.Api.csproj" />
   </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />

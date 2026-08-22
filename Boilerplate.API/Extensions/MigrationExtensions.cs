@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EnquiryRouting.Api;
+using Microsoft.EntityFrameworkCore;
 
-namespace Boilerplate.API.Extensions
+namespace EnquiryRouting.Api.Extensions
 {
 	public static class MigrationExtensions
 	{

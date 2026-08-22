@@ -1,0 +1,8 @@
+﻿namespace EnquiryRouting.Api.Entities
+{
+	public class Skill
+	{
+		public Guid Id { get; set; }
+		public required string Name { get; set; }
+	}
+}

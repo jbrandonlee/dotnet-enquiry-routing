@@ -1,21 +1,21 @@
-name: dotnet_postgres_boilerplate
+name: dotnet_enquiryrouting
 
 services:
-  boilerplate.api:
+  enquiryrouting.api:
     build:
       context: .
-      dockerfile: Boilerplate.API/Dockerfile
+      dockerfile: EnquiryRouting.Api/Dockerfile
     ports:
       - 8080:8080
       - 8081:8081
     environment:
-      - ConnectionStrings__Database=Host=boilerplate.database;Port=5432;Database=${DB_DATABASE};Username=${DB_USER};Password=${DB_PASSWORD};Include Error Detail=True;
+      - ConnectionStrings__Database=Host=enquiryrouting.database;Port=5432;Database=${DB_DATABASE};Username=${DB_USER};Password=${DB_PASSWORD};Include Error Detail=True;
     depends_on:
-      boilerplate.database:
+      enquiryrouting.database:
         condition: service_healthy
     restart: always
 
-  boilerplate.database:
+  enquiryrouting.database:
     image: postgres:latest
     environment:
       - POSTGRES_DB=${DB_DATABASE}

@@ -1,8 +1,8 @@
-﻿using Boilerplate.API.Entities;
+﻿using EnquiryRouting.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Boilerplate.API.EntityConfigurations
+namespace EnquiryRouting.Api.EntityConfigurations
 {
 	public class MovieEntityConfiguration : IEntityTypeConfiguration<Movie>
 	{
