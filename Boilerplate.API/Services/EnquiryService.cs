@@ -4,7 +4,7 @@ using EnquiryRouting.Api.Models.Request;
 
 namespace EnquiryRouting.Api.Services
 {
-	public class EnquiryService(IEnquiryRepository enquiryRepository, ISkillRepository skillRepository) : IEnquiryService
+	public class EnquiryService(IEnquiryRepository enquiryRepository, ISkillRepository skillRepository, IMatchingService matchingService) : IEnquiryService
 	{
 		public async Task<Enquiry?> GetEnquiryByIdAsync(Guid enquiryId)
 		{
@@ -21,7 +21,7 @@ namespace EnquiryRouting.Api.Services
 			var skills = await skillRepository.GetByNamesAsync(dto.RequiredSkills);
 			var enquiry = dto.ToDomainModel(skills.ToHashSet());
 
-			await enquiryRepository.AddAsync(enquiry);
+			await matchingService.TryMatchEnquiryAsync(enquiry);
 			return enquiry;
 		}
 
@@ -40,8 +40,9 @@ namespace EnquiryRouting.Api.Services
 			var enquiry = await enquiryRepository.GetByIdAsync(dto.EnquiryId);
 			if (enquiry is null) return;
 
-			enquiry.Close(dto.AgentId);
+			enquiry.SetToClosed(dto.AgentId);
 			await enquiryRepository.UpdateAsync(enquiry);
+			await matchingService.TryMatchRecentEnquiriesAsync(dto.AgentId);
 		}
 	}
 }

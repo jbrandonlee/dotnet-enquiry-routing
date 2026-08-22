@@ -4,7 +4,7 @@ using EnquiryRouting.Api.Models.Request;
 
 namespace EnquiryRouting.Api.Services
 {
-	public class AgentService(IAgentRepository agentRepository, ISkillRepository skillRepository) : IAgentService
+	public class AgentService(IAgentRepository agentRepository, ISkillRepository skillRepository, IMatchingService matchingService) : IAgentService
 	{
 		public async Task<Agent?> GetAgentByIdAsync(Guid agentId)
 		{
@@ -27,6 +27,7 @@ namespace EnquiryRouting.Api.Services
 
 			agent.UpdateStatus(dto.Status);
 			await agentRepository.UpdateAsync(agent);
+			await matchingService.TryMatchRecentEnquiriesAsync(agent);
 		}
 	}
 }

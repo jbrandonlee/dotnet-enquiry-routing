@@ -1,6 +1,7 @@
 ﻿using EnquiryRouting.Api.Enums;
 using EnquiryRouting.Api.Extensions;
 using EnquiryRouting.Api.Utils;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EnquiryRouting.Api.Entities
 {
@@ -8,7 +9,6 @@ namespace EnquiryRouting.Api.Entities
 	{
 		public Guid Id { get; private set; } // Primary Key
 		public LanguageCode LanguageCode { get; private set; }
-		public EnquiryStatus Status { get; private set; }
 		public Guid? AgentId { get; private set; } // Foreign Key (Optional)
 		public DateTimeOffset DateTimeCreated { get; private set; }
 		public DateTimeOffset? DateTimeClosed { get; private set; }
@@ -21,11 +21,24 @@ namespace EnquiryRouting.Api.Entities
 		private readonly ICollection<Skill> _requiredSkills = new HashSet<Skill>();
 		public IReadOnlyCollection<Skill> RequiredSkills => _requiredSkills.ToList().AsReadOnly();
 
+		#region Derived Properties
+		[NotMapped]
+		public bool IsUrgent => _requiredSkills.Any(x => x.IsPriority);
+
+		[NotMapped]
+		public bool IsPending => AgentId is null && !IsClosed;
+
+		[NotMapped]
+		public bool IsAssigned => AgentId is not null && !IsClosed;
+
+		[NotMapped]
+		public bool IsClosed => ClosedBy is not null;
+		#endregion
+
 		public Enquiry(Guid customerId, LanguageCode languageCode, ChatMessage initialMessage, IEnumerable<Skill> requiredSkills)
 		{
 			Id = Guid.NewGuid();
 			LanguageCode = languageCode;
-			Status = EnquiryStatus.Pending;
 			AgentId = null;
 			DateTimeCreated = CommonUtils.SgtNow;
 			DateTimeClosed = null;
@@ -36,16 +49,8 @@ namespace EnquiryRouting.Api.Entities
 			_requiredSkills.AddRange(requiredSkills);
 		}
 
-		public void Assign(Guid agentId)
+		public void SetToClosed(Guid agentId)
 		{
-			if (Status != EnquiryStatus.Pending || AgentId is not null) { return; }
-			Status = EnquiryStatus.Assigned;
-			AgentId = agentId;
-		}
-
-		public void Close(Guid agentId)
-		{
-			Status = EnquiryStatus.Closed;
 			DateTimeClosed = CommonUtils.SgtNow;
 			ClosedBy = agentId;
 		}

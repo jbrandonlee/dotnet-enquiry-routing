@@ -46,5 +46,16 @@ namespace EnquiryRouting.Api.Repositories
 				.Where(x => x.CreatedBy == clientId)
 				.ToListAsync();
 		}
+
+		public async Task<IEnumerable<Enquiry>> GetByRequirementsAsync(int count, IEnumerable<Skill> agentSkills, double matchingThreshold)
+		{
+			return await dbContext.Enquiries
+				.Where(x => x.IsPending)
+				.Where(x => (double) agentSkills.Intersect(x.RequiredSkills).Count() / x.RequiredSkills.Count() > matchingThreshold)
+				.OrderByDescending(x => x.IsUrgent) // IsUrgent comes first
+				.ThenBy(x => x.DateTimeCreated) // LeastRecent comes first
+				.Take(count)
+				.ToListAsync();
+		}
 	}
 }

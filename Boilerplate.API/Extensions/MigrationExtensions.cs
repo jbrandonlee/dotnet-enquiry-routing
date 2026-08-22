@@ -1,5 +1,4 @@
-﻿using EnquiryRouting.Api;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace EnquiryRouting.Api.Extensions
 {

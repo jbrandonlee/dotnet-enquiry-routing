@@ -15,7 +15,6 @@ namespace EnquiryRouting.Api.Entities
 		public ChatMessage(Guid senderId, MessageSenderType senderType, string message)
 		{
 			Id = Guid.NewGuid();
-			//EnquiryId = enquiryId; automatically generated?
 			SenderId = senderId;
 			SenderType = senderType;
 			Message = message;

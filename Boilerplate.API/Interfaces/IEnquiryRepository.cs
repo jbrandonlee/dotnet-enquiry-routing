@@ -10,5 +10,6 @@ namespace EnquiryRouting.Api.Interfaces
 		Task<IEnumerable<Enquiry>> GetByAgentIdAsync(Guid agentId);
 		Task<IEnumerable<Enquiry>> GetByClientIdAsync(Guid clientId);
 		Task<IEnumerable<Enquiry>> GetByClientIdAsync(Guid clientId, DateTimeOffset dateTimeLastReceived);
+		Task<IEnumerable<Enquiry>> GetByRequirementsAsync(int count, IEnumerable<Skill> agentSkills, double matchingThreshold);
 	}
 }

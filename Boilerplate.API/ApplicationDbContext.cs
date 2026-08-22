@@ -1,5 +1,4 @@
 ﻿using EnquiryRouting.Api.Entities;
-using EnquiryRouting.Api.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnquiryRouting.Api
