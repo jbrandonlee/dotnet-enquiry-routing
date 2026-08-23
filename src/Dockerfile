@@ -12,8 +12,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["EnquiryRouting.Api/EnquiryRouting.Api.csproj", "EnquiryRouting.Api/"]
-RUN dotnet restore "./EnquiryRouting.Api/EnquiryRouting.Api.csproj"
+COPY ["src/EnquiryRouting.Api.csproj", "EnquiryRouting.Api/"]
+RUN dotnet restore "./src/EnquiryRouting.Api.csproj"
 COPY . .
 WORKDIR "/src/EnquiryRouting.Api"
 RUN dotnet build "./EnquiryRouting.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

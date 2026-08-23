@@ -17,7 +17,9 @@ namespace EnquiryRouting.Api.Models.Request
 		{
 			LanguageCode languageCodeEnum = Enum.Parse<LanguageCode>(dto.LanguageCode);
 			var initalMessage = new ChatMessage(dto.ClientId, MessageSenderType.Client, dto.Message);
-			var enquiry = new Enquiry(dto.ClientId, languageCodeEnum, initalMessage, skills);
+			var enquiry = new Enquiry(languageCodeEnum, dto.ClientId);
+			enquiry.AddMessage(initalMessage);
+			enquiry.AddRequiredSkills(skills);
 			return enquiry;
 		}
 	}

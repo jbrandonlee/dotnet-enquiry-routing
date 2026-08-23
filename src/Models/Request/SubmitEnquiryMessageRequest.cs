@@ -7,8 +7,8 @@ namespace EnquiryRouting.Api.Models.Request
 	{
 		public Guid EnquiryId { get; set; }
 		public Guid SenderId { get; set; }
-		public string SenderType { get; set; } = string.Empty;
-		public string Message { get; set; } = string.Empty;
+		public required string SenderType { get; set; }
+		public required string Message { get; set; }
 	}
 
 	public static class SubmitEnquiryMessageRequestExtensions

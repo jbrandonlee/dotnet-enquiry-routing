@@ -11,14 +11,14 @@ namespace EnquiryRouting.Api.Entities
 		public int MaxCapacity { get; private set; }
 		public AgentStatus Status { get; private set; }
 
-		private readonly ICollection<LanguageCode> _languages = new HashSet<LanguageCode>();
-		public IReadOnlyCollection<LanguageCode> Languages => _languages.ToList().AsReadOnly();
+		private readonly ICollection<AgentLanguage> _languages = new HashSet<AgentLanguage>();
+		public IReadOnlyCollection<AgentLanguage> Languages => (IReadOnlyCollection<AgentLanguage>)_languages;
 
 		private readonly ICollection<Skill> _skills = new HashSet<Skill>();
-		public IReadOnlyCollection<Skill> Skills => _skills.ToList().AsReadOnly();
+		public IReadOnlyCollection<Skill> Skills => (IReadOnlyCollection<Skill>)_skills;
 
 		private readonly ICollection<Enquiry> _enquiries = new List<Enquiry>();
-		public IReadOnlyCollection<Enquiry> Enquiries => _enquiries.ToList().AsReadOnly();
+		public IReadOnlyCollection<Enquiry> Enquiries => (IReadOnlyCollection<Enquiry>)_enquiries;
 
 		#region Derived Properties
 		[NotMapped]
@@ -28,12 +28,20 @@ namespace EnquiryRouting.Api.Entities
 		public bool IsAvailable => RemainingCapacity > 0 && Status == AgentStatus.Online;
 		#endregion
 
-		public Agent(string name, int maxCapacity, IEnumerable<LanguageCode> languages, IEnumerable<Skill> skills)
+		public Agent(string name, int maxCapacity)
 		{
 			Name = name;
 			MaxCapacity = maxCapacity;
 			Status = AgentStatus.Offline;
+		}
+
+		public void AddLanguages(IEnumerable<AgentLanguage> languages)
+		{
 			_languages.AddRange(languages);
+		}
+
+		public void AddSkills(IEnumerable<Skill> skills)
+		{
 			_skills.AddRange(skills);
 		}
 

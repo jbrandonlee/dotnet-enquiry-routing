@@ -7,6 +7,6 @@
 		public bool IsPriority { get; set; }
 
 		// private readonly ICollection<Agent> _agents = new List<Agent>();
-		// public IReadOnlyCollection<Agent> Agents => _agents.ToList().AsReadOnly();
+		// public IReadOnlyCollection<Agent> Agents => (IReadOnlyCollection<Agent>)_agents;
 	}
 }

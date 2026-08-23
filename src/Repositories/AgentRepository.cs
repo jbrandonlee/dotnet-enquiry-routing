@@ -26,7 +26,7 @@ namespace EnquiryRouting.Api.Repositories
 
 		public async Task<Agent?> GetByRequirementsAsync(LanguageCode languageCode, IEnumerable<Skill> requiredSkills, double matchingThreshold)
 		{
-			var queryable = dbContext.Agents.Where(x => x.Languages.Contains(languageCode))
+			var queryable = dbContext.Agents.Where(x => x.Languages.Select(x => x.LanguageCode).Contains(languageCode))
 											.Where(x => x.IsAvailable);
 			
 			// assign agent meets jaccard containment threshold

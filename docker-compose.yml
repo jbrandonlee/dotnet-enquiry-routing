@@ -4,7 +4,7 @@ services:
   enquiryrouting.api:
     build:
       context: .
-      dockerfile: EnquiryRouting.Api/Dockerfile
+      dockerfile: src/Dockerfile
     ports:
       - 8080:8080
       - 8081:8081

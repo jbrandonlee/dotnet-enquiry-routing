@@ -16,10 +16,10 @@ namespace EnquiryRouting.Api.Entities
 		public Guid? ClosedBy { get; private set; }
 
 		private readonly ICollection<ChatMessage> _messages = new List<ChatMessage>();
-		public IReadOnlyCollection<ChatMessage> Messages => _messages.ToList().AsReadOnly();
+		public IReadOnlyCollection<ChatMessage> Messages => (IReadOnlyCollection<ChatMessage>)_messages;
 
 		private readonly ICollection<Skill> _requiredSkills = new HashSet<Skill>();
-		public IReadOnlyCollection<Skill> RequiredSkills => _requiredSkills.ToList().AsReadOnly();
+		public IReadOnlyCollection<Skill> RequiredSkills => (IReadOnlyCollection<Skill>)_requiredSkills;
 
 		#region Derived Properties
 		[NotMapped]
@@ -35,18 +35,15 @@ namespace EnquiryRouting.Api.Entities
 		public bool IsClosed => ClosedBy is not null;
 		#endregion
 
-		public Enquiry(Guid customerId, LanguageCode languageCode, ChatMessage initialMessage, IEnumerable<Skill> requiredSkills)
+		public Enquiry(LanguageCode languageCode, Guid createdBy)
 		{
 			Id = Guid.NewGuid();
 			LanguageCode = languageCode;
 			AgentId = null;
 			DateTimeCreated = CommonUtils.SgtNow;
 			DateTimeClosed = null;
-			CreatedBy = customerId;
+			CreatedBy = createdBy;
 			ClosedBy = null;
-
-			_messages.Add(initialMessage);
-			_requiredSkills.AddRange(requiredSkills);
 		}
 
 		public void SetToClosed(Guid agentId)
@@ -58,6 +55,11 @@ namespace EnquiryRouting.Api.Entities
 		public void AddMessage(ChatMessage chatMessage)
 		{
 			_messages.Add(chatMessage);
+		}
+
+		public void AddRequiredSkills(IEnumerable<Skill> requiredSkills)
+		{
+			_requiredSkills.AddRange(requiredSkills);
 		}
 	}
 }

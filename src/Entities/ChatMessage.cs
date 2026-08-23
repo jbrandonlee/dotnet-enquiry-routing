@@ -10,7 +10,7 @@ namespace EnquiryRouting.Api.Entities
 		public Guid SenderId { get; set; }
 		public MessageSenderType SenderType { get; set; }
 		public string Message { get; set; }
-		public DateTimeOffset DateTimeCreated {  get; set; }
+		public DateTimeOffset DateTimeCreated { get; set; }
 
 		public ChatMessage(Guid senderId, MessageSenderType senderType, string message)
 		{
