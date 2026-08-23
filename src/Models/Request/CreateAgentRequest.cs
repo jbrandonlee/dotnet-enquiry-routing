@@ -5,10 +5,10 @@ namespace EnquiryRouting.Api.Models.Request
 {
 	public class CreateAgentRequest
 	{
-		public required string Name;
-		public int MaxCapacity;
-		public IEnumerable<string> Languages = new List<string>();
-		public IEnumerable<string> Skills = new List<string>();
+		public required string Name { get; set; }
+		public int MaxCapacity { get; set; }
+		public IEnumerable<string> Languages { get; set; } = new List<string>();
+		public IEnumerable<string> Skills { get; set; } = new List<string>();
 	}
 
 	public static class CreateAgentRequestExtensions

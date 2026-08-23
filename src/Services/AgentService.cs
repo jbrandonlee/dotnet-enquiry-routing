@@ -1,4 +1,5 @@
 ﻿using EnquiryRouting.Api.Entities;
+using EnquiryRouting.Api.Enums;
 using EnquiryRouting.Api.Interfaces;
 using EnquiryRouting.Api.Models.Request;
 
@@ -27,7 +28,11 @@ namespace EnquiryRouting.Api.Services
 
 			agent.UpdateStatus(dto.Status);
 			await agentRepository.UpdateAsync(agent);
-			await matchingService.TryMatchRecentEnquiriesAsync(agent);
+
+			if (dto.Status == AgentStatus.Online.ToString())
+			{
+				await matchingService.TryMatchRecentEnquiriesAsync(agent);
+			}
 		}
 	}
 }

@@ -30,6 +30,7 @@ namespace EnquiryRouting.Api.Entities
 
 		public Agent(string name, int maxCapacity)
 		{
+			Id = Guid.NewGuid();
 			Name = name;
 			MaxCapacity = maxCapacity;
 			Status = AgentStatus.Offline;
@@ -53,6 +54,7 @@ namespace EnquiryRouting.Api.Entities
 			if (!IsAvailable)
 				throw new InvalidOperationException("Agent has no remaining capacity or is not online.");
 
+			enquiry.AddMessage(new ChatMessage(Guid.Empty, MessageSenderType.System, $"Agent {Name} has been added to the chat."));
 			_enquiries.Add(enquiry);
 		}
 

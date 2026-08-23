@@ -21,6 +21,7 @@ namespace EnquiryRouting.Api.Services
 			var skills = await skillRepository.GetByNamesAsync(dto.RequiredSkills);
 			var enquiry = dto.ToDomainModel(skills.ToHashSet());
 
+			await enquiryRepository.AddAsync(enquiry);
 			await matchingService.TryMatchEnquiryAsync(enquiry);
 			return enquiry;
 		}

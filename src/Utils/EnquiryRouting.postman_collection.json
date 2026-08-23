@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "0f9b1be6-8066-42fe-9046-f969612258fb",
+    "name": "EnquiryRouting",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32872035"
+  },
+  "item": [
+    {
+      "name": "Agent",
+      "item": [
+        {
+          "name": "CreateAgent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"Name\": \"Alice\",\r\n    \"MaxCapacity\": 1,\r\n    \"Languages\": [\"EN\"],\r\n    \"Skills\": [\"Account\", \"Fraud\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:8081/agents",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "agents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "CreateAgent - Alice",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"Name\": \"Alice\",\r\n    \"MaxCapacity\": 1,\r\n    \"Languages\": [\"EN\"],\r\n    \"Skills\": [\"Account\", \"Fraud\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/agents",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "agents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "CreateAgent - Bob",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"Name\": \"Bob\",\r\n    \"MaxCapacity\": 1,\r\n    \"Languages\": [\"EN\"],\r\n    \"Skills\": [\"Credit Card\", \"Bills\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/agents",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "agents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            },
+            {
+              "name": "CreateAgent - Charlie",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"Name\": \"Charlie\",\r\n    \"MaxCapacity\": 1,\r\n    \"Languages\": [\"EN\", \"ZH\"],\r\n    \"Skills\": [\"Account\", \"Credit Card\", \"Bills\", \"Fees\", \"Fraud\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/agents",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "agents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "GetAgent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:8081/agents/43d9a571-ed84-42ed-affd-cf0707f00f3b",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "agents",
+                "43d9a571-ed84-42ed-affd-cf0707f00f3b"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "GetAgent",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:8081/agents/00000000-0000-0000-0000-000000000000",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "agents",
+                    "00000000-0000-0000-0000-000000000000"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "UpdateAgentStatus",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"AgentId\": \"43d9a571-ed84-42ed-affd-cf0707f00f3b\",\r\n    \"Status\": \"Online\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:8081/agents/43d9a571-ed84-42ed-affd-cf0707f00f3b/status",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "agents",
+                "43d9a571-ed84-42ed-affd-cf0707f00f3b",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Client",
+      "item": [
+        {
+          "name": "GetEnquiryById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:8081/enquiries/8bf98fab-4e8f-48d8-bc58-29d54ac4a939",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "enquiries",
+                "8bf98fab-4e8f-48d8-bc58-29d54ac4a939"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "GetEnquiryById",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://localhost:8081/enquiries/00000000-0000-0000-0000-000000000000",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "enquiries",
+                    "00000000-0000-0000-0000-000000000000"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "SubmitEnquiry",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ClientId\": \"00000000-0000-0000-0000-000000000001\",\r\n    \"LanguageCode\": \"EN\",\r\n    \"Message\": \"Help, I don't remember my PIN.\",\r\n    \"RequiredSkills\": [\"Account\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:8081/enquiries",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "enquiries"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "SubmitEnquiry",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"ClientId\": \"00000000-0000-0000-0000-000000000000\",\r\n    \"LanguageCode\": \"EN\",\r\n    \"Message\": \"Help, I don't remember my PIN.\",\r\n    \"RequiredSkills\": [\"Account\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/enquiries/",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "enquiries",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "SubmitEnquiryMessage",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"EnquiryId\": \"8bf98fab-4e8f-48d8-bc58-29d54ac4a939\",\r\n    \"SenderId\": \"43d9a571-ed84-42ed-affd-cf0707f00f3b\",\r\n    \"SenderType\": \"Agent\",\r\n    \"Message\": \"Please proceed to reset your password using SingPass.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:8081/enquiries/8bf98fab-4e8f-48d8-bc58-29d54ac4a939/message",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "enquiries",
+                "8bf98fab-4e8f-48d8-bc58-29d54ac4a939",
+                "message"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "SubmitEnquiryMessage",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"EnquiryId\": \"8bf98fab-4e8f-48d8-bc58-29d54ac4a939\",\r\n    \"SenderId\": \"43d9a571-ed84-42ed-affd-cf0707f00f3b\",\r\n    \"SenderType\": \"Agent\",\r\n    \"Message\": \"Please proceed to reset your password using SingPass.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/enquiries/8bf98fab-4e8f-48d8-bc58-29d54ac4a939/message",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "enquiries",
+                    "8bf98fab-4e8f-48d8-bc58-29d54ac4a939",
+                    "message"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "CloseEnquiry",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"EnquiryId\": \"8bf98fab-4e8f-48d8-bc58-29d54ac4a939\",\r\n    \"AgentId\": \"43d9a571-ed84-42ed-affd-cf0707f00f3b\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:8081/enquiries/8bf98fab-4e8f-48d8-bc58-29d54ac4a939/close",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "enquiries",
+                "8bf98fab-4e8f-48d8-bc58-29d54ac4a939",
+                "close"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "CloseEnquiry",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"EnquiryId\": \"8bf98fab-4e8f-48d8-bc58-29d54ac4a939\",\r\n    \"AgentId\": \"43d9a571-ed84-42ed-affd-cf0707f00f3b\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://localhost:8081/enquiries/8bf98fab-4e8f-48d8-bc58-29d54ac4a939/close",
+                  "protocol": "https",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8081",
+                  "path": [
+                    "enquiries",
+                    "8bf98fab-4e8f-48d8-bc58-29d54ac4a939",
+                    "close"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

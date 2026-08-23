@@ -22,6 +22,8 @@ namespace EnquiryRouting.Api.Services
 
 			var matchingEnquiries = await enquiryRepository.GetByRequirementsAsync(agent.RemainingCapacity, agent.Skills, _matchingThreshold);
 
+			if (!matchingEnquiries.Any()) return;
+			
 			foreach (var enquiry in matchingEnquiries)
 			{
 				agent.AssignEnquiry(enquiry);

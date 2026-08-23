@@ -1,5 +1,4 @@
 ﻿using EnquiryRouting.Api.Enums;
-using EnquiryRouting.Api.Utils;
 
 namespace EnquiryRouting.Api.Entities
 {
@@ -18,7 +17,7 @@ namespace EnquiryRouting.Api.Entities
 			SenderId = senderId;
 			SenderType = senderType;
 			Message = message;
-			DateTimeCreated = CommonUtils.SgtNow;
+			DateTimeCreated = DateTimeOffset.UtcNow;
 		}
 	}
 }

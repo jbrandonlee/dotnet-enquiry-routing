@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EnquiryRouting.Api.Controllers
 {
+	[Route("[controller]")]
+	[ApiController]
 	public class AgentsController(IAgentService agentService) : ControllerBase
 	{
 		[HttpGet("{id}")]
