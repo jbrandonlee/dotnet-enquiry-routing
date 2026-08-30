@@ -1,31 +1,34 @@
-﻿using EnquiryRouting.Api.Entities;
-using EnquiryRouting.Api.Interfaces;
+﻿using EnquiryRouting.Api.Interfaces;
 using EnquiryRouting.Api.Models.Request;
+using EnquiryRouting.Api.Models.Response;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnquiryRouting.Api.Controllers
 {
 	[Route("[controller]")]
 	[ApiController]
-	public class EnquiriesController(IEnquiryService enquiryService) : ControllerBase
+	public class EnquiriesController(IEnquiryService enquiryService, IValidator<SubmitEnquiryRequest> submitEnquiryRequestValidator) : ControllerBase
 	{
 		[HttpGet("{id}")]
-		public async Task<ActionResult<Enquiry>> GetById(Guid id, [FromQuery] DateTimeOffset? after)
+		public async Task<ActionResult<EnquiryViewModel>> GetById(Guid id, [FromQuery] DateTimeOffset? from)
 		{
-			var enquiry = await enquiryService.GetEnquiryByIdAsync(id);
+			var dateTimeFrom = from ?? DateTimeOffset.MinValue;
+			var enquiry = await enquiryService.GetRecentEnquiryMessagesByIdAsync(id, dateTimeFrom);
 			if (enquiry is null) return NotFound();
-			return Ok(enquiry);
+			return Ok(enquiry.ToViewModel());
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<Enquiry>> SubmitEnquiry([FromBody] SubmitEnquiryRequest dto)
+		public async Task<ActionResult<EnquiryViewModel>> SubmitEnquiry([FromBody] SubmitEnquiryRequest dto)
 		{
+			if (!submitEnquiryRequestValidator.Validate(dto).IsValid) return BadRequest();
 			var enquiry = await enquiryService.CreateEnquiryAsync(dto);
-			return CreatedAtAction(nameof(GetById), new { id = enquiry.Id }, enquiry);
+			return CreatedAtAction(nameof(GetById), new { id = enquiry.Id }, enquiry.ToViewModel());
 		}
 
 		[HttpPost("{id}/message")]
-		public async Task<ActionResult<ChatMessage>> SubmitEnquiryMessage(Guid id, [FromBody] SubmitEnquiryMessageRequest dto)
+		public async Task<IActionResult> SubmitEnquiryMessage(Guid id, [FromBody] SubmitEnquiryMessageRequest dto)
 		{
 			if (id != dto.EnquiryId) return BadRequest();
 			await enquiryService.AddEnquiryMessageAsync(dto);

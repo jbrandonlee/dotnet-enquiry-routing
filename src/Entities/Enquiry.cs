@@ -1,4 +1,5 @@
-﻿using EnquiryRouting.Api.Enums;
+﻿using EnquiryRouting.Api.Constants;
+using EnquiryRouting.Api.Enums;
 using EnquiryRouting.Api.Extensions;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
@@ -48,7 +49,7 @@ namespace EnquiryRouting.Api.Entities
 
 		public void SetToClosed(Guid agentId)
 		{
-			AddMessage(new ChatMessage(Guid.Empty, MessageSenderType.System, $"The chat is now closed."));
+			AddMessage(new ChatMessage(CommonConstant.DisplayNameSystem, MessageSenderType.System, $"The chat is now closed."));
 			DateTimeClosed = DateTimeOffset.UtcNow;
 			ClosedBy = agentId;
 		}

@@ -1,11 +1,12 @@
-﻿using EnquiryRouting.Api.Entities;
+﻿using EnquiryRouting.Api.Constants;
+using EnquiryRouting.Api.Entities;
 using EnquiryRouting.Api.Interfaces;
 
 namespace EnquiryRouting.Api.Services
 {
 	public class MatchingService(IAgentRepository agentRepository, IEnquiryRepository enquiryRepository) : IMatchingService
 	{
-		private readonly double _matchingThreshold = 0.50;
+		private readonly double _matchingThreshold = CommonConstant.MatchingThreshold;
 
 		public async Task TryMatchEnquiryAsync(Enquiry enquiry)
 		{

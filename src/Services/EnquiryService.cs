@@ -11,9 +11,9 @@ namespace EnquiryRouting.Api.Services
 			return await enquiryRepository.GetByIdAsync(enquiryId);
 		}
 
-		public async Task<IEnumerable<Enquiry>> GetEnquiriesByAgentIdAsync(Guid agentId)
+		public async Task<Enquiry?> GetRecentEnquiryMessagesByIdAsync(Guid enquiryId, DateTimeOffset dateTimeFrom)
 		{
-			return await enquiryRepository.GetByAgentIdAsync(agentId);
+			return await enquiryRepository.GetRecentEnquiryMessagesByIdAsync(enquiryId, dateTimeFrom);
 		}
 
 		public async Task<Enquiry> CreateEnquiryAsync(SubmitEnquiryRequest dto)
@@ -29,7 +29,7 @@ namespace EnquiryRouting.Api.Services
 		public async Task AddEnquiryMessageAsync(SubmitEnquiryMessageRequest dto)
 		{
 			var enquiry = await enquiryRepository.GetByIdAsync(dto.EnquiryId);
-			if (enquiry is null) return;
+			if (enquiry is null || enquiry.IsClosed) return;
 
 			var chatMessage = dto.ToDomainModel();
 			enquiry.AddMessage(chatMessage);

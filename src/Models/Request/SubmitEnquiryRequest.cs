@@ -1,4 +1,5 @@
-﻿using EnquiryRouting.Api.Entities;
+﻿using EnquiryRouting.Api.Constants;
+using EnquiryRouting.Api.Entities;
 using EnquiryRouting.Api.Enums;
 
 namespace EnquiryRouting.Api.Models.Request
@@ -16,7 +17,7 @@ namespace EnquiryRouting.Api.Models.Request
 		public static Enquiry ToDomainModel(this SubmitEnquiryRequest dto, HashSet<Skill> skills)
 		{
 			LanguageCode languageCodeEnum = Enum.Parse<LanguageCode>(dto.LanguageCode);
-			var initalMessage = new ChatMessage(dto.ClientId, MessageSenderType.Client, dto.Message);
+			var initalMessage = new ChatMessage(CommonConstant.DisplayNameClient, MessageSenderType.Client, dto.Message);
 			var enquiry = new Enquiry(languageCodeEnum, dto.ClientId);
 			enquiry.AddMessage(initalMessage);
 			enquiry.AddRequiredSkills(skills);

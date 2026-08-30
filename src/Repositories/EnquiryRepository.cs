@@ -26,6 +26,13 @@ namespace EnquiryRouting.Api.Repositories
 				.SingleOrDefaultAsync(x => x.Id == enquiryId);
 		}
 
+		public async Task<Enquiry?> GetRecentEnquiryMessagesByIdAsync(Guid enquiryId, DateTimeOffset dateTimeFrom)
+		{
+			return await dbContext.Enquiries
+				.Include(e => e.Messages.Where(m => m.DateTimeCreated >= dateTimeFrom))
+				.SingleOrDefaultAsync(e => e.Id == enquiryId);
+		}
+
 		public async Task<IEnumerable<Enquiry>> GetByAgentIdAsync(Guid agentId)
 		{
 			return await dbContext.Enquiries

@@ -6,15 +6,15 @@ namespace EnquiryRouting.Api.Entities
 	{
 		public Guid Id { get; set; } // Primary Key
 		public Guid EnquiryId { get; set; } // Foreign Key
-		public Guid SenderId { get; set; }
+		public string SenderName { get; set; }
 		public MessageSenderType SenderType { get; set; }
 		public string Message { get; set; }
 		public DateTimeOffset DateTimeCreated { get; set; }
 
-		public ChatMessage(Guid senderId, MessageSenderType senderType, string message)
+		public ChatMessage(string senderName, MessageSenderType senderType, string message)
 		{
 			Id = Guid.NewGuid();
-			SenderId = senderId;
+			SenderName = senderName;
 			SenderType = senderType;
 			Message = message;
 			DateTimeCreated = DateTimeOffset.UtcNow;

@@ -18,8 +18,9 @@ namespace EnquiryRouting.Api.EntityConfigurations
 			builder.Property(x => x.EnquiryId)
 				.IsRequired();
 
-			builder.Property(x => x.SenderId)
-				.IsRequired();
+			builder.Property(x => x.SenderName)
+				.IsRequired()
+				.HasMaxLength(200);
 
 			builder.Property(x => x.SenderType)
 				.IsRequired()
@@ -31,11 +32,6 @@ namespace EnquiryRouting.Api.EntityConfigurations
 
 			builder.Property(x => x.DateTimeCreated)
 				.IsRequired();
-
-			//builder.HasOne<Enquiry>()
-			//	.WithMany(x => x.Messages)
-			//	.HasForeignKey(x => x.EnquiryId)
-			//	.OnDelete(DeleteBehavior.Cascade);
 
 			// Efficient retrieval of a conversation in chronological order
 			builder.HasIndex(x => new { x.EnquiryId, x.DateTimeCreated });

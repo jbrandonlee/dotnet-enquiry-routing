@@ -3,6 +3,11 @@ using EnquiryRouting.Api.Enums;
 
 namespace EnquiryRouting.Api.Models.Request
 {
+	public class CreateAgentsRequest
+	{
+		public IEnumerable<CreateAgentRequest> Agents { get; set; } = new List<CreateAgentRequest>();
+	}
+
 	public class CreateAgentRequest
 	{
 		public required string Name { get; set; }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EnquiryRouting.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260823075736_InitialMigration")]
+    [Migration("20260828144909_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -93,8 +93,10 @@ namespace EnquiryRouting.Api.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("character varying(4000)");
 
-                    b.Property<Guid>("SenderId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<int>("SenderType")
                         .HasColumnType("integer");

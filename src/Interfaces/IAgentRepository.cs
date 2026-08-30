@@ -7,7 +7,9 @@ namespace EnquiryRouting.Api.Interfaces
 	{
 		Task AddAsync(Agent agent);
 		Task UpdateAsync(Agent agent);
+		Task<IEnumerable<Agent>> GetAllAsync();
 		Task<Agent?> GetByIdAsync(Guid agentId);
+		Task<Agent?> GetActiveEnquiriesByAgentIdAsync(Guid agentId, DateTimeOffset dateTimeFrom);
 		Task<Agent?> GetByRequirementsAsync(LanguageCode languageCode, IEnumerable<Skill> requiredSkills, double matchingThreshold);
 	}
 }

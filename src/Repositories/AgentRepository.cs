@@ -28,6 +28,19 @@ namespace EnquiryRouting.Api.Repositories
 				.SingleOrDefaultAsync(x => x.Id == agentId);
 		}
 
+		public async Task<IEnumerable<Agent>> GetAllAsync()
+		{
+			return await dbContext.Agents.ToListAsync();
+		}
+
+		public async Task<Agent?> GetActiveEnquiriesByAgentIdAsync(Guid agentId, DateTimeOffset dateTimeFrom)
+		{
+			return await dbContext.Agents
+				.Include(x => x.Enquiries.Where(x => x.ClosedBy == null))
+					.ThenInclude(e => e.Messages.Where(x => x.DateTimeCreated >= dateTimeFrom))
+				.SingleOrDefaultAsync(x => x.Id == agentId);
+		}
+
 		public async Task<Agent?> GetByRequirementsAsync(LanguageCode languageCode, IEnumerable<Skill> requiredSkills, double matchingThreshold)
 		{
 			var requiredSkillIds = requiredSkills.Select(x => x.Id);

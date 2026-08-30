@@ -1,7 +1,10 @@
 using EnquiryRouting.Api.Extensions;
 using EnquiryRouting.Api.Interfaces;
+using EnquiryRouting.Api.Models.Request;
 using EnquiryRouting.Api.Repositories;
 using EnquiryRouting.Api.Services;
+using EnquiryRouting.Api.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnquiryRouting.Api
@@ -17,6 +20,10 @@ namespace EnquiryRouting.Api
 			builder.Services.AddDbContext<ApplicationDbContext>(
 				options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database"))
 			);
+
+			#region Add FluentValidation
+			builder.Services.AddTransient<IValidator<SubmitEnquiryRequest>, SubmitEnquiryRequestValidator>();
+			#endregion
 
 			#region Add Domain Services
 			builder.Services.AddScoped<IAgentService, AgentService>();

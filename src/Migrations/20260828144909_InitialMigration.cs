@@ -122,7 +122,7 @@ namespace EnquiryRouting.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     EnquiryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SenderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SenderName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     SenderType = table.Column<int>(type: "integer", nullable: false),
                     Message = table.Column<string>(type: "character varying(4000)", maxLength: 4000, nullable: false),
                     DateTimeCreated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
