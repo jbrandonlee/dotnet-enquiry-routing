@@ -16,6 +16,7 @@ namespace EnquiryRouting.Api.Models.Response
 			{
 				AgentName = agent.Name,
 				Enquiries = agent.Enquiries.Select(x => x.ToViewModel())
+										   .OrderBy(x => x.DateTimeCreated)
 			};
 		}
 	}

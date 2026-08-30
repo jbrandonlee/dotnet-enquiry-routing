@@ -49,7 +49,7 @@ namespace EnquiryRouting.Api.Entities
 
 		public void SetToClosed(Guid agentId)
 		{
-			AddMessage(new ChatMessage(CommonConstant.DisplayNameSystem, MessageSenderType.System, $"The chat is now closed."));
+			AddMessage(new ChatMessage(Guid.NewGuid(), CommonConstant.DisplayNameSystem, MessageSenderType.System, $"The chat is now closed."));
 			DateTimeClosed = DateTimeOffset.UtcNow;
 			ClosedBy = agentId;
 		}

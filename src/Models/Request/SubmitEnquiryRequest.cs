@@ -7,6 +7,7 @@ namespace EnquiryRouting.Api.Models.Request
 	public class SubmitEnquiryRequest
 	{
 		public Guid ClientId { get; set; }
+		public Guid MessageId { get; set; }
 		public string LanguageCode { get; set; } = string.Empty;
 		public string Message { get; set; } = string.Empty;
 		public IEnumerable<string> RequiredSkills { get; set; } = new List<string>();
@@ -17,7 +18,7 @@ namespace EnquiryRouting.Api.Models.Request
 		public static Enquiry ToDomainModel(this SubmitEnquiryRequest dto, HashSet<Skill> skills)
 		{
 			LanguageCode languageCodeEnum = Enum.Parse<LanguageCode>(dto.LanguageCode);
-			var initalMessage = new ChatMessage(CommonConstant.DisplayNameClient, MessageSenderType.Client, dto.Message);
+			var initalMessage = new ChatMessage(dto.MessageId, CommonConstant.DisplayNameClient, MessageSenderType.Client, dto.Message);
 			var enquiry = new Enquiry(languageCodeEnum, dto.ClientId);
 			enquiry.AddMessage(initalMessage);
 			enquiry.AddRequiredSkills(skills);

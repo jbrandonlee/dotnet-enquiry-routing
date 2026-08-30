@@ -30,7 +30,7 @@ namespace EnquiryRouting.Api.Repositories
 
 		public async Task<IEnumerable<Agent>> GetAllAsync()
 		{
-			return await dbContext.Agents.ToListAsync();
+			return await dbContext.Agents.Include(x => x.Enquiries).ToListAsync();
 		}
 
 		public async Task<Agent?> GetActiveEnquiriesByAgentIdAsync(Guid agentId, DateTimeOffset dateTimeFrom)

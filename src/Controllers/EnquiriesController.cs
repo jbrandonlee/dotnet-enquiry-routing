@@ -11,9 +11,9 @@ namespace EnquiryRouting.Api.Controllers
 	public class EnquiriesController(IEnquiryService enquiryService, IValidator<SubmitEnquiryRequest> submitEnquiryRequestValidator) : ControllerBase
 	{
 		[HttpGet("{id}")]
-		public async Task<ActionResult<EnquiryViewModel>> GetById(Guid id, [FromQuery] DateTimeOffset? from)
+		public async Task<ActionResult<EnquiryViewModel>> GetById(Guid id, [FromQuery] long? from)
 		{
-			var dateTimeFrom = from ?? DateTimeOffset.MinValue;
+			var dateTimeFrom = (from is not null) ? DateTimeOffset.FromUnixTimeSeconds(from.Value) : DateTimeOffset.MinValue;
 			var enquiry = await enquiryService.GetRecentEnquiryMessagesByIdAsync(id, dateTimeFrom);
 			if (enquiry is null) return NotFound();
 			return Ok(enquiry.ToViewModel());

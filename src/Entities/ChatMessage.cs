@@ -11,9 +11,9 @@ namespace EnquiryRouting.Api.Entities
 		public string Message { get; set; }
 		public DateTimeOffset DateTimeCreated { get; set; }
 
-		public ChatMessage(string senderName, MessageSenderType senderType, string message)
+		public ChatMessage(Guid id, string senderName, MessageSenderType senderType, string message)
 		{
-			Id = Guid.NewGuid();
+			Id = id;
 			SenderName = senderName;
 			SenderType = senderType;
 			Message = message;

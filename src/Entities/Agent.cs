@@ -55,7 +55,7 @@ namespace EnquiryRouting.Api.Entities
 			if (!IsAvailable)
 				throw new InvalidOperationException("Agent has no remaining capacity or is not online.");
 
-			enquiry.AddMessage(new ChatMessage(CommonConstant.DisplayNameSystem, MessageSenderType.System, $"Agent {Name} has been added to the chat."));
+			enquiry.AddMessage(new ChatMessage(Guid.NewGuid(), CommonConstant.DisplayNameSystem, MessageSenderType.System, $"Agent {Name} has been added to the chat."));
 			_enquiries.Add(enquiry);
 		}
 

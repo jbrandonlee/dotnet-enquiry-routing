@@ -7,6 +7,7 @@ namespace EnquiryRouting.Api.Models.Response
 	{
 		public string SenderName { get; set; } = string.Empty;
 		public MessageSenderType SenderType { get; set; }
+		public Guid MessageId {  get; set; }
 		public string Message { get; set; } = string.Empty;
 		public DateTimeOffset DateTimeCreated { get; set; }
 	}
@@ -20,6 +21,7 @@ namespace EnquiryRouting.Api.Models.Response
 				SenderName = chatMessage.SenderName,
 				SenderType = chatMessage.SenderType,
 				Message = chatMessage.Message,
+				MessageId = chatMessage.Id,
 				DateTimeCreated = chatMessage.DateTimeCreated
 			};
 		}

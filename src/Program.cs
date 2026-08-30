@@ -21,6 +21,17 @@ namespace EnquiryRouting.Api
 				options => options.UseNpgsql(builder.Configuration.GetConnectionString("Database"))
 			);
 
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy("AllowAll", policy =>
+				{
+					policy
+						.AllowAnyOrigin()
+						.AllowAnyHeader()
+						.AllowAnyMethod();
+				});
+			});
+
 			#region Add FluentValidation
 			builder.Services.AddTransient<IValidator<SubmitEnquiryRequest>, SubmitEnquiryRequestValidator>();
 			#endregion
@@ -47,6 +58,7 @@ namespace EnquiryRouting.Api
 
 			app.UseHttpsRedirection();
 			app.UseAuthorization();
+			app.UseCors("AllowAll");
 			app.MapControllers();
 
 			app.Run();

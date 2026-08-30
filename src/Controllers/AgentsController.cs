@@ -22,7 +22,8 @@ namespace EnquiryRouting.Api.Controllers
 		public async Task<ActionResult<IEnumerable<AgentDetailsViewModel>>> GetAll()
 		{
 			var agentList = await agentService.GetAllAgentsAsync();
-			return Ok(agentList.Select(x => x.ToDetailsViewModel()));
+			var viewModel = agentList.Select(x => x.ToDetailsViewModel()).OrderBy(x => x.AgentName);
+			return Ok(viewModel);
 		}
 
 		[HttpGet("{id}/enquiries")]
